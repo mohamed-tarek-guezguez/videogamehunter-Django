@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product, Contact, News, Story
+from .models import Product, Contact, News, Story, Banner, Ytb
 from django.core.paginator import Paginator
 
 from django.http import HttpResponse
@@ -26,6 +26,8 @@ def index(request):
     prods = Product.objects.all().order_by('-id')
     news = News.objects.all().order_by('-id')[:3]
     story = Story.objects.all().order_by('-id')[:3]
+    banner = Banner.objects.all().order_by('-id')[:1]
+    ytb = Ytb.objects.all().order_by('-id')[:1]
 
     q = request.GET.get('q')
     if q:
@@ -69,6 +71,8 @@ def index(request):
         'prods': prods,
         'news': news,
         'story': story,
+        'banner': banner,
+        'ytb': ytb,
         'myCatFilter': myCatFilter,
         'form': form,
         'query': query,
